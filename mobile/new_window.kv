@@ -85,3 +85,34 @@ WindowManager:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
 
+<Cam>:
+    name: "cam"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: [20, 20, 20, 20]
+        spacing: 20
+
+        Label:
+            text: "Camera Screen"
+            font_size: "30sp"
+            font_name: "Roboto"
+            color: 0, 0, 0, 1
+            size_hint_y: None
+            height: self.texture_size[1]
+            halign: "center"
+
+        Button:
+            text: "Back to Start Menu"
+            font_size: "24sp"
+            font_name: "Roboto"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.7, 0.4, 0.4, 1  # Muted red
+            background_normal: ''
+            background_down: ''
+            border: (20, 20, 20, 20)
+            on_release:
+                app.root.current = "start"
+                root.manager.transition.direction = "right"
