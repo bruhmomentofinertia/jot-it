@@ -1,0 +1,62 @@
+#:kivy 2.1.0
+
+WindowManager:
+    Start:
+    Cam:
+    Generated:
+
+<Start>:
+    name:"start"
+    BoxLayout:
+        orientation:"vertical"
+        size:root.width, root.height
+        Label:
+            text: "WELCOME"
+            font_size: 32
+        Button: 
+            text: "Go to Camera"
+            font_size: 32
+            on_release: 
+                app.root.current = "cam"
+                root.manager.transition.direction = "left"
+
+<Cam>:
+    name:"cam"
+    BoxLayout:
+        orientation:"vertical"
+        size:root.width, root.height
+        Label:
+            text: "CAMARA HERE"
+            font_size: 32
+        Button: 
+            text: "Generate Translation"
+            font_size: 32
+            on_release: 
+                app.root.current = "gen"
+                root.manager.transition.direction = "left"
+        Button:
+            text: "Back to Start Menu"
+            font_size:32
+            on_release:
+                app.root.current = "start"
+                root.manager.transition.direction = "right"
+<Generated>:
+    name:"gen"
+    BoxLayout:
+        orientation:"vertical"
+        size:root.width, root.height
+        Label:
+            text: "GENERATED SENTENCE HERE"
+            font_size: 32
+        Button: 
+            text: "Go Back to Camera"
+            font_size: 32
+            on_release:
+                app.root.current = "cam"
+                root.manager.transition.direction = "right"
+        Button: 
+            text: "Go back to start menu"
+            font_size:32
+            on_release:
+                app.root.current = "start"
+                root.manager.transition.direction = "right"
