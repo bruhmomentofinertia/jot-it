@@ -36,7 +36,7 @@ WindowManager:
             size_hint: None, None
             size: "250dp", "50dp"
             pos_hint: {"center_x": 0.5}
-            background_color: 0.4, 0.6, 0.7, 1  # Muted blue
+            background_color: 0.8, 0.6, 0.7, 1  # Muted pink
             background_normal: ''
             background_down: ''
             border: (20, 20, 20, 20)  # Rounded corners
@@ -49,7 +49,7 @@ WindowManager:
             size_hint: None, None
             size: "250dp", "50dp"
             pos_hint: {"center_x": 0.5}
-            background_color: 0.5, 0.7, 0.5, 1  # Muted green
+            background_color: 0.75, 0.5, 0.6, 1  # Muted pink
             background_normal: ''
             background_down: ''
             border: (20, 20, 20, 20)
@@ -70,9 +70,6 @@ WindowManager:
             resolution: (640, 480)
             play: True  
 
-        # Button: #remove this later and change above to True
-        #     text: "Toggle Camera"
-        #     on_release: root.start_camera()
         Label:
             text: "Camera Screen"
             font_size: "30sp"
@@ -81,12 +78,16 @@ WindowManager:
             size_hint_y: None
             height: self.texture_size[1]
             halign: "center"
+        
         Button:
             text: "Take Picture"
+            background_color: 0.9, 0.7, 0.8, 1  # Lighter muted pink
             on_release: root.take_picture()
+        
         Button: 
             text: "Generate Translation"
             font_size: 32
+            background_color: 0.85, 0.6, 0.7, 1  # Lighter muted pink
             on_release: 
                 app.root.current = "gen"
                 root.manager.transition.direction = "left"
@@ -98,7 +99,7 @@ WindowManager:
             size_hint: None, None
             size: "250dp", "50dp"
             pos_hint: {"center_x": 0.5}
-            background_color: 0.7, 0.4, 0.4, 1  # Muted red
+            background_color: 0.8, 0.6, 0.7, 1  # Muted pink
             background_normal: ''
             background_down: ''
             border: (20, 20, 20, 20)
@@ -126,20 +127,21 @@ WindowManager:
             size_hint: None, None
             size: "250dp", "50dp"
             pos_hint: {"center_x": 0.5}
-            background_color: 0.7, 0.4, 0.4, 1  # Muted red
+            background_color: 0.8, 0.6, 0.7, 1  # Muted pink
             background_normal: ''
             background_down: ''
             border: (20, 20, 20, 20)
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
+        
         Button: 
             text: "Generate Translation"
             font_size: 32
+            background_color: 0.75, 0.5, 0.6, 1  # Muted pink
             on_release: 
                 app.root.current = "gen"
                 root.manager.transition.direction = "left"
-
 
 <Generated>:
     name:"gen"
@@ -152,14 +154,15 @@ WindowManager:
         Button: 
             text: "Go Back to Camera"
             font_size: 32
+            background_color: 0.9, 0.7, 0.8, 1  # Lighter muted pink
             on_release:
                 app.root.current = "camera"
                 root.manager.transition.direction = "right"
+        
         Button: 
             text: "Go back to start menu"
             font_size:32
+            background_color: 0.9, 0.7, 0.8, 1  # Lighter muted pink
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
-
-
