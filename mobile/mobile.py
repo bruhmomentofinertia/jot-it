@@ -8,14 +8,29 @@ from kivy.uix.label import Label
 from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen 
 from kivy.lang import Builder
+from kivy.uix.camera import Camera
+
+# # from kivy.uix.camera import Camera, pip install kivy[base], opencv-python
+
+
+# from kivy import Config
+# Config.set('graphics', 'multisamples', '0')  # Fix potential OpenGL issues
+
+# from kivy.core.camera import Camera,CoreCamera
+# Camera._select_camera_backend("ffpyplayer")
+
+#need to import kivy and ffpyplayer and download the kivy extension, kivy[base]
 
 class Start(Screen):
     pass
 
-class Upload(Screen):
-    pass
-
 class Cam(Screen):
+    def start_camera(self):
+        camera = self.ids.cam
+        camera.play = not camera.play  
+
+
+class Upload(Screen):
     pass
 
 class Generated(Screen):
@@ -24,7 +39,7 @@ class Generated(Screen):
 class WindowManager(ScreenManager):
     pass
 
-kv = Builder.load_file("new_window.kv")
+kv = Builder.load_file("new_windoww.kv")
 
 class Medical(App):
     def build(self):

@@ -27,6 +27,24 @@ WindowManager:
                 app.root.current = "upld"
                 root.manager.transition.direction = "left"
 
+<CameraScreen>:
+    name: "cam"
+    BoxLayout:
+        orientation: 'vertical'
+
+        Camera:
+            id: cam
+            resolution: (640, 480)
+            play: False  # Camera starts off
+
+        Button:
+            text: "Toggle Camera"
+            on_press: root.start_camera()
+
+        Button:
+            text: "Back"
+            on_press: app.root.current = "main"  # Change to your main screen name
+
 <Upload>:
     name:"upld"
     BoxLayout:
@@ -41,27 +59,33 @@ WindowManager:
             on_release: 
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
-
-<Cam>:
-    name:"cam"
-    BoxLayout:
-        orientation:"vertical"
-        size:root.width, root.height
-        Label:
-            text: "CAMERA HERE"
-            font_size: 32
         Button: 
             text: "Generate Translation"
             font_size: 32
             on_release: 
                 app.root.current = "gen"
                 root.manager.transition.direction = "left"
-        Button:
-            text: "Back to Start Menu"
-            font_size:32
-            on_release:
-                app.root.current = "start"
-                root.manager.transition.direction = "right"
+
+# <Cam>:
+#     name:"cam"
+#     BoxLayout:
+#         orientation:"vertical"
+#         size:root.width, root.height
+#         Label:
+#             text: "CAMERA HERE"
+#             font_size: 32
+#         Button: 
+#             text: "Generate Translation"
+#             font_size: 32
+#             on_release: 
+#                 app.root.current = "gen"
+#                 root.manager.transition.direction = "left"
+#         Button:
+#             text: "Back to Start Menu"
+#             font_size:32
+#             on_release:
+#                 app.root.current = "start"
+#                 root.manager.transition.direction = "right"
 <Generated>:
     name:"gen"
     BoxLayout:
