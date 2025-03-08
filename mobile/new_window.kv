@@ -119,6 +119,14 @@ WindowManager:
             id: filechooser
             filters: ['*.png', '*.jpg', '*.jpeg', '*.gif', '*.bmp']  # Only image files
             on_selection: app.selected_file(filechooser.selection)  # Pass selected file to app
+        
+        Button: 
+            text: "Generate Translation"
+            font_size: 32
+            background_color: 0.75, 0.5, 0.6, 1  # Muted pink
+            on_release: 
+                app.root.current = "gen"
+                root.manager.transition.direction = "left"
 
         Button:
             text: "Back to Start Menu"
@@ -134,14 +142,6 @@ WindowManager:
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
-        
-        Button: 
-            text: "Generate Translation"
-            font_size: 32
-            background_color: 0.75, 0.5, 0.6, 1  # Muted pink
-            on_release: 
-                app.root.current = "gen"
-                root.manager.transition.direction = "left"
 
 <Generated>:
     name:"gen"
