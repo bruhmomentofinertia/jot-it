@@ -2,6 +2,7 @@
 
 WindowManager:
     Start:
+    Upload:
     Cam:
     Generated:
 
@@ -19,6 +20,27 @@ WindowManager:
             on_release: 
                 app.root.current = "cam"
                 root.manager.transition.direction = "left"
+        Button:
+            text: "Upload a picture"
+            font_size: 32
+            on_release: 
+                app.root.current = "upld"
+                root.manager.transition.direction = "left"
+
+<Upload>:
+    name:"upld"
+    BoxLayout:
+        orientation:"vertical"
+        size:root.width, root.height
+        Label:
+            text: "uploading thing here"
+            font_size: 32
+        Button: 
+            text: "Go to back to Start"
+            font_size: 32
+            on_release: 
+                app.root.current = "start"
+                root.manager.transition.direction = "right"
 
 <Cam>:
     name:"cam"
@@ -26,7 +48,7 @@ WindowManager:
         orientation:"vertical"
         size:root.width, root.height
         Label:
-            text: "CAMARA HERE"
+            text: "CAMERA HERE"
             font_size: 32
         Button: 
             text: "Generate Translation"
