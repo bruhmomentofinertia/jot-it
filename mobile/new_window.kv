@@ -2,83 +2,125 @@
 
 WindowManager:
     Start:
-    Upload:
     Cam:
     Generated:
 
 <Start>:
-    name:"start"
+    name: "start"
     BoxLayout:
-        orientation:"vertical"
-        size:root.width, root.height
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: [20, 20, 20, 20]  # Adding padding to the layout
+        spacing: 20  # Space between widgets
+        
+        Image:
+            source: "osbone.png"
+            size_hint: None, None
+            size: "250dp", "250dp"
+            pos_hint: {"center_x": 0.5}
+        
         Label:
-            text: "WELCOME"
-            font_size: 32
-        Button: 
+            text: "Welcome to Medical App"
+            font_size: "30sp"
+            color: 0, 0, 0, 1  # Black color for text
+            size_hint_y: None
+            height: self.texture_size[1]
+            halign: "center"
+        
+        Button:
+            text: "Upload Photo"
+            font_size: "24sp"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.2, 0.6, 0.8, 1  # Light blue button
+            on_release:
+                # Here, you will later define the upload photo functionality
+                print("Upload Photo clicked")  # Placeholder for now
+        
+        Button:
             text: "Go to Camera"
-            font_size: 32
-            on_release: 
+            font_size: "24sp"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.2, 0.6, 0.2, 1  # Green button
+            on_release:
                 app.root.current = "cam"
                 root.manager.transition.direction = "left"
-        Button:
-            text: "Upload a picture"
-            font_size: 32
-            on_release: 
-                app.root.current = "upld"
-                root.manager.transition.direction = "left"
-
-<Upload>:
-    name:"upld"
-    BoxLayout:
-        orientation:"vertical"
-        size:root.width, root.height
-        Label:
-            text: "uploading thing here"
-            font_size: 32
-        Button: 
-            text: "Go to back to Start"
-            font_size: 32
-            on_release: 
-                app.root.current = "start"
-                root.manager.transition.direction = "right"
 
 <Cam>:
-    name:"cam"
+    name: "cam"
     BoxLayout:
-        orientation:"vertical"
-        size:root.width, root.height
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: [20, 20, 20, 20]
+        spacing: 20
+        
         Label:
-            text: "CAMERA HERE"
-            font_size: 32
-        Button: 
+            text: "Camera is here"
+            font_size: "30sp"
+            color: 0, 0, 0, 1
+            size_hint_y: None
+            height: self.texture_size[1]
+            halign: "center"
+        
+        Button:
             text: "Generate Translation"
-            font_size: 32
-            on_release: 
+            font_size: "24sp"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.2, 0.6, 0.2, 1
+            on_release:
                 app.root.current = "gen"
                 root.manager.transition.direction = "left"
+        
         Button:
             text: "Back to Start Menu"
-            font_size:32
+            font_size: "24sp"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.6, 0.2, 0.2, 1  # Red button
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
+
 <Generated>:
-    name:"gen"
+    name: "gen"
     BoxLayout:
-        orientation:"vertical"
-        size:root.width, root.height
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: [20, 20, 20, 20]
+        spacing: 20
+        
         Label:
-            text: "GENERATED SENTENCE HERE"
-            font_size: 32
-        Button: 
+            text: "Generated Sentence: 'Sample Translation'"
+            font_size: "30sp"
+            color: 0, 0, 0, 1
+            size_hint_y: None
+            height: self.texture_size[1]
+            halign: "center"
+        
+        Button:
             text: "Go Back to Camera"
-            font_size: 32
+            font_size: "24sp"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.2, 0.6, 0.2, 1
             on_release:
                 app.root.current = "cam"
                 root.manager.transition.direction = "right"
-        Button: 
-            text: "Go back to start menu"
-            font_size:32
+        
+        Button:
+            text: "Go Back to Start Menu"
+            font_size: "24sp"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.6, 0.2, 0.2, 1
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
