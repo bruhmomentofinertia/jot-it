@@ -56,7 +56,6 @@ WindowManager:
             on_release:
                 app.root.current = "camera"
                 root.manager.transition.direction = "left"
-        
 
 <Cam>:
     name: "camera"
@@ -69,7 +68,7 @@ WindowManager:
             id: cam
             index: 0
             resolution: (640, 480)
-            play: True  # Camera starts off
+            play: True  
 
         # Button: #remove this later and change above to True
         #     text: "Toggle Camera"
@@ -82,7 +81,9 @@ WindowManager:
             size_hint_y: None
             height: self.texture_size[1]
             halign: "center"
-        
+        Button:
+            text: "Take Picture"
+            on_release: root.take_picture()
         Button: 
             text: "Generate Translation"
             font_size: 32

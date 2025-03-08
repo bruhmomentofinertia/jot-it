@@ -4,19 +4,12 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.uix.filechooser import FileChooserIconView
-
+from kivy.clock import Clock
+import time
 from kivy.uix.camera import Camera
 
-# # from kivy.uix.camera import Camera, pip install kivy[base], opencv-python
 
-
-# from kivy import Config
-# Config.set('graphics', 'multisamples', '0')  # Fix potential OpenGL issues
-
-# from kivy.core.camera import Camera,CoreCamera
-# Camera._select_camera_backend("ffpyplayer")
-
-#need to import kivy and ffpyplayer and download the kivy extension, kivy[base]
+#need to import kivy and ffpyplayer and download the kivy extension, kivy[base], opencv-python
 
 class Start(Screen):
     pass
@@ -24,7 +17,14 @@ class Start(Screen):
 class Cam(Screen):
     def start_camera(self):
         camera = self.ids.cam
-        camera.play = not camera.play  
+        camera.play = not camera.play 
+    def take_picture(self):
+        camera = self.ids.cam
+        if camera.play:  # Ensure camera is on before taking a picture
+            timestamp = time.strftime("%Y%m%d-%H%M%S")  # Unique filename
+            filepath = f"captured_image_{timestamp}.png"
+            camera.export_to_png(filepath)
+            print(f"Image saved to {filepath}")
 
 
 class Upload(Screen):
