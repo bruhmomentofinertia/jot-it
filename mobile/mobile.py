@@ -7,6 +7,7 @@ from kivy.uix.filechooser import FileChooserIconView
 from kivy.clock import Clock
 import time
 from kivy.uix.camera import Camera
+import os
 
 
 #need to import kivy and ffpyplayer and download the kivy extension, kivy[base], opencv-python
@@ -17,15 +18,18 @@ class Start(Screen):
 class Cam(Screen):
     def start_camera(self):
         camera = self.ids.cam
-        camera.play = not camera.play 
+        camera.play = not camera.play #on off
     def take_picture(self):
         camera = self.ids.cam
-        if camera.play:  # Ensure camera is on before taking a picture
-            timestamp = time.strftime("%Y%m%d-%H%M%S")  # Unique filename
-            filepath = f"captured_image_{timestamp}.png"
+        if camera.play: 
+            save_dir = os.path.join(os.getcwd(), "saved_photos") 
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir) # if folder doesnt exist make it
+            existing_files = [f for f in os.listdir(save_dir) if f.startswith("photo_") and f.endswith(".png")] #count how many long the current folder is it get the next avalible index
+            picture_count = len(existing_files) + 1 
+            filename = f"photo_{picture_count}.png"
+            filepath = os.path.join(save_dir, filename)
             camera.export_to_png(filepath)
-            print(f"Image saved to {filepath}")
-
 
 class Upload(Screen):
     pass
