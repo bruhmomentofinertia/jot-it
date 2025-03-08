@@ -27,10 +27,8 @@ class Cam(Screen):
         camera.play = not camera.play  
 
 
-
 class Upload(Screen):
     pass
-
 
 
 class Generated(Screen):
@@ -41,7 +39,7 @@ class WindowManager(ScreenManager):
     pass
 
 
-kv = Builder.load_file("new_windoww.kv")
+kv = Builder.load_file("new_window.kv")
 
 
 class JotIt(App):

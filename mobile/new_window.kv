@@ -54,26 +54,56 @@ WindowManager:
             background_down: ''
             border: (20, 20, 20, 20)
             on_release:
-                app.root.current = "cam"
+                app.root.current = "camera"
                 root.manager.transition.direction = "left"
+        
 
-<CameraScreen>:
-    name: "cam"
+<Cam>:
+    name: "camera"
     BoxLayout:
-        orientation: 'vertical'
-
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: [20, 20, 20, 20]
+        spacing: 20
         Camera:
             id: cam
+            index: 0
             resolution: (640, 480)
-            play: False  # Camera starts off
+            play: True  # Camera starts off
+
+        # Button: #remove this later and change above to True
+        #     text: "Toggle Camera"
+        #     on_release: root.start_camera()
+        Label:
+            text: "Camera Screen"
+            font_size: "30sp"
+            font_name: "Roboto"
+            color: 0, 0, 0, 1
+            size_hint_y: None
+            height: self.texture_size[1]
+            halign: "center"
+        
+        Button: 
+            text: "Generate Translation"
+            font_size: 32
+            on_release: 
+                app.root.current = "gen"
+                root.manager.transition.direction = "left"
 
         Button:
-            text: "Toggle Camera"
-            on_press: root.start_camera()
-
-        Button:
-            text: "Back"
-            on_press: app.root.current = "main"  # Change to your main screen name
+            text: "Back to Start Menu"
+            font_size: "24sp"
+            font_name: "Roboto"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.7, 0.4, 0.4, 1  # Muted red
+            background_normal: ''
+            background_down: ''
+            border: (20, 20, 20, 20)
+            on_release:
+                app.root.current = "start"
+                root.manager.transition.direction = "right"
 
 <Upload>:
     name: "upload"
@@ -102,7 +132,6 @@ WindowManager:
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
-<<<<<<< HEAD
         Button: 
             text: "Generate Translation"
             font_size: 32
@@ -110,26 +139,7 @@ WindowManager:
                 app.root.current = "gen"
                 root.manager.transition.direction = "left"
 
-# <Cam>:
-#     name:"cam"
-#     BoxLayout:
-#         orientation:"vertical"
-#         size:root.width, root.height
-#         Label:
-#             text: "CAMERA HERE"
-#             font_size: 32
-#         Button: 
-#             text: "Generate Translation"
-#             font_size: 32
-#             on_release: 
-#                 app.root.current = "gen"
-#                 root.manager.transition.direction = "left"
-#         Button:
-#             text: "Back to Start Menu"
-#             font_size:32
-#             on_release:
-#                 app.root.current = "start"
-#                 root.manager.transition.direction = "right"
+
 <Generated>:
     name:"gen"
     BoxLayout:
@@ -142,7 +152,7 @@ WindowManager:
             text: "Go Back to Camera"
             font_size: 32
             on_release:
-                app.root.current = "cam"
+                app.root.current = "camera"
                 root.manager.transition.direction = "right"
         Button: 
             text: "Go back to start menu"
@@ -150,37 +160,5 @@ WindowManager:
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
-=======
 
-<Cam>:
-    name: "cam"
-    BoxLayout:
-        orientation: "vertical"
-        size: root.width, root.height
-        padding: [20, 20, 20, 20]
-        spacing: 20
 
-        Label:
-            text: "Camera Screen"
-            font_size: "30sp"
-            font_name: "Roboto"
-            color: 0, 0, 0, 1
-            size_hint_y: None
-            height: self.texture_size[1]
-            halign: "center"
-
-        Button:
-            text: "Back to Start Menu"
-            font_size: "24sp"
-            font_name: "Roboto"
-            size_hint: None, None
-            size: "250dp", "50dp"
-            pos_hint: {"center_x": 0.5}
-            background_color: 0.7, 0.4, 0.4, 1  # Muted red
-            background_normal: ''
-            background_down: ''
-            border: (20, 20, 20, 20)
-            on_release:
-                app.root.current = "start"
-                root.manager.transition.direction = "right"
->>>>>>> 7823474bd5d9a732787ccb5290a55bd2b0ea0af9
