@@ -8,6 +8,7 @@ WindowManager:
     Show:
     Enter:
     Rate:
+    Review:
 
 <Start>:
     name: "start"
@@ -130,9 +131,42 @@ WindowManager:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
 
-
 <Enter>:
     name: "enter"
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation: "horizontal"
+            # Image:
+            #     id: doc_image
+            #     source: app.get_doctor() + "png"
+            #     size_hint: None, None
+            Label:
+                # text: "Rating: " + app.get_rating_full()
+        Button:
+            on_release:
+                app.root.current = "review"
+                root.manager.transition.direction = "right"
+
+<Review>:
+    name: "review"
+    Label:
+        text: "Enter rating:"
+    TextInput:
+        id: rating
+        multiline: False 
+    Label:
+        text: "Enter review:"
+    TextInput:
+        id: rating
+        multiline: True 
+    Button:
+        text: "Submit"
+        on_press: 
+            app.process_written(written.text)
+            app.process_rating(rating.text)
+
+   
 
 <Cam>:
     name: "camera"
@@ -147,29 +181,10 @@ WindowManager:
         Camera:
             id: cam
             index: 0
-            #resolution: (640, 480)
             resolution: (1280, 720)
             play: True  
             allow_stretch: True  # Allows the camera to stretch to fit the space
             keep_ratio: False
-            # canvas.before:
-            #     PushMatrix
-            #     Rotate:
-            #         angle: 90 if platform.system() == "Darwin" else 0  # Rotate only on macOS
-            #         origin: self.center
-            # canvas.after:
-            #     PopMatrix
-
-        # Label:
-        #     text: "Camera Screen"
-        #     font_size: "30sp"
-        #     size_hint: None, None
-        #     font_name: "Roboto"
-        #     color: 0, 0, 0, 1
-        #     size_hint_y: None
-        #     size: "250dp", "50dp"
-        #     height: self.texture_size[1]
-        #     halign: "center"
         
         Button:
             text: "Take Picture"
@@ -180,16 +195,6 @@ WindowManager:
             on_release: 
                 root.take_picture()
                 app.root.current = "show"
-        # Button: 
-        #     text: "Generate Translation"
-        #     size_hint: None, None
-        #     size: "250dp", "50dp"
-        #     font_size: 32
-        #     pos_hint: {"center_x": 0.5}
-        #     background_color: 0.85, 0.6, 0.7, 1  # Lighter muted pink
-        #     on_release: 
-        #         app.root.current = "gen"
-        #         root.manager.transition.direction = "left"
 
         Button:
             text: "Back to Start Menu"
