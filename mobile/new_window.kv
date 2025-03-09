@@ -205,32 +205,38 @@ WindowManager:
 
 <Enter>:
     name: "enter"
-    BoxLayout:
-        orientation: "vertical"
-        # BoxLayout:
-            # orientation: "horizontal"
-        Image:
-            id: doc_image
-            source: "ayse_sokullu.png" #app.get_doctor() + "png"
-            size: "500dp", "300dp"
+    AnchorLayout:
+        anchor_x: 'left'
+        anchor_y: 'top'
+        
+        BoxLayout:
+            orientation: 'vertical'
             size_hint: None, None
-        Label:
-            text: "Rating: "
-            font_size: sp(18)
-            color: (0.6, 0.1, 0.4, 1)  # Dark pink text
-            size_hint_y: None
-            height: self.texture_size[1] + dp(10)
+            size: self.width, self.height
 
-            # text: "Rating: " + app.get_rating_full()
-        Button:
-            text: "Write a review"
-            size_hint_y: None
-            height: dp(50)
-            background_color: 0.9, 0.7, 0.8, 1
-            color: (1, 1, 1, 1)
-            on_release:
-                app.root.current = "review"
-                root.manager.transition.direction = "right"
+            Image:
+                id: doc_image
+                source: "ayse_sokullu.png"  #app.get_doctor() + "png"
+                size: "500dp", "300dp"
+                size_hint: None, None
+                pos_hint: {'x': 0, 'top': 1}  # Position the image at the top left
+            
+            Label:
+                text: "Rating: "
+                font_size: sp(18)
+                color: (0.6, 0.1, 0.4, 1)  # Dark pink text
+                size_hint_y: None
+                height: self.texture_size[1] + dp(10)
+
+            Button:
+                text: "Write a review"
+                size_hint_y: None
+                height: dp(50)
+                background_color: 0.9, 0.7, 0.8, 1
+                color: (1, 1, 1, 1)
+                on_release:
+                    app.root.current = "review"
+                    root.manager.transition.direction = "right"
 
 <Review>:
     name: "review"
