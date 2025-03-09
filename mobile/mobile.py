@@ -80,7 +80,7 @@ class JotIt(App):
         self.hospital_name = ""  # Variable to store input text
         self.doctor_name = ""
         self.country_name = ""
-        self.written = ""
+        self.written= ""
         self.rating = []
     def process_rating(self,text):
         self.rating += [int(text)]

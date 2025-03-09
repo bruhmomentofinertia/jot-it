@@ -81,29 +81,70 @@ WindowManager:
     name: "rate"
     BoxLayout:
         orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(10)
+        background_color: (1, 0.9, 0.9, 1)  # Light pink background
+
         Label:
             text: "Enter County:"
+            font_size: sp(18)
+            color: (0.6, 0.1, 0.4, 1)  # Dark pink text
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+
         TextInput:
             id: country
-            # text: "Enter the name of the hospital:"
-            multiline: False 
+            hint_text: "Type county name here..."
+            multiline: False
+            size_hint_y: None
+            height: dp(40)
+            padding: dp(10)
+            font_size: sp(16)
+            background_color: (1, 0.8, 0.9, 1)  # Light pink input box
+            foreground_color: (0.4, 0, 0.2, 1)  # Dark pink text
+            border: (2, 2, 2, 2)
+
         Button:
             text: "Submit"
+            size_hint_y: None
+            height: dp(40)
+            background_color: 0.9, 0.7, 0.8, 1  # Same as Search and Back buttons
+            color: (1, 1, 1, 1)  # White text
             on_press: 
                 app.process_country(country.text)
                 more_selection.opacity = 1
+
         BoxLayout:
             orientation: "vertical"
             id: more_selection
-            opacity: 0 
+            opacity: 0
+            spacing: dp(10)
+
             Label:
                 text: "Enter the name of the hospital:"
+                font_size: sp(18)
+                color: (0.6, 0.1, 0.4, 1)
+                size_hint_y: None
+                height: self.texture_size[1] + dp(10)
+
             TextInput:
                 id: hospital
-                # text: "Enter the name of the hospital:"
-                multiline: False 
+                hint_text: "Type hospital name here..."
+                multiline: False
+                size_hint_y: None
+                height: dp(40)
+                padding: dp(10)
+                font_size: sp(16)
+                background_color: (1, 0.8, 0.9, 1)
+                foreground_color: (0.4, 0, 0.2, 1)
+                border: (2, 2, 2, 2)
+
             Button:
                 text: "Submit"
+                size_hint_y: None
+                height: dp(40)
+                background_color: 0.9, 0.7, 0.8, 1  # Same as Search and Back buttons
+                color: (1, 1, 1, 1)
                 on_press: 
                     app.process_hospital(hospital.text)
                     even_more_selection.opacity = 1
@@ -111,62 +152,131 @@ WindowManager:
             BoxLayout:
                 id: even_more_selection
                 orientation: "vertical"
-                opacity: 0 
+                opacity: 0
+                spacing: dp(10)
+
                 Label:
                     text: "Enter the name of the Doctor:"
+                    font_size: sp(18)
+                    color: (0.6, 0.1, 0.4, 1)
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(10)
+
                 TextInput:
                     id: doctor
-                    multiline: False 
+                    hint_text: "Type doctor name here..."
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(40)
+                    padding: dp(10)
+                    font_size: sp(16)
+                    background_color: (1, 0.8, 0.9, 1)
+                    foreground_color: (0.4, 0, 0.2, 1)
+                    border: (2, 2, 2, 2)
+
                 Button:
                     text: "Submit"
+                    size_hint_y: None
+                    height: dp(40)
+                    background_color: 0.9, 0.7, 0.8, 1  # Same as Search and Back buttons
+                    color: (1, 1, 1, 1)
                     on_press: app.process_doctor(doctor.text)
+
         Button:
             text: "Search"
+            size_hint_y: None
+            height: dp(50)
+            background_color: 0.9, 0.7, 0.8, 1
+            color: (1, 1, 1, 1)
             on_release:
                 app.root.current = "enter"
                 root.manager.transition.direction = "right"
+
         Button:
             text: "Back to Start Menu"
+            size_hint_y: None
+            height: dp(50)
+            background_color: 0.9, 0.7, 0.8, 1
+            color: (1, 1, 1, 1)
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
+
 
 <Enter>:
     name: "enter"
     BoxLayout:
         orientation: "vertical"
-        BoxLayout:
-            orientation: "horizontal"
-            # Image:
-            #     id: doc_image
-            #     source: app.get_doctor() + "png"
-            #     size_hint: None, None
-            Label:
-                # text: "Rating: " + app.get_rating_full()
+        # BoxLayout:
+            # orientation: "horizontal"
+        Image:
+            id: doc_image
+            source: "ayse_sokullu.png" #app.get_doctor() + "png"
+            size: "500dp", "300dp"
+            size_hint: None, None
+        Label:
+            text: "Rating: "
+            font_size: sp(18)
+            color: (0.6, 0.1, 0.4, 1)  # Dark pink text
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+
+            # text: "Rating: " + app.get_rating_full()
         Button:
+            text: "Write a review"
+            size_hint_y: None
+            height: dp(50)
+            background_color: 0.9, 0.7, 0.8, 1
+            color: (1, 1, 1, 1)
             on_release:
                 app.root.current = "review"
                 root.manager.transition.direction = "right"
 
 <Review>:
     name: "review"
-    Label:
-        text: "Enter rating:"
-    TextInput:
-        id: rating
-        multiline: False 
-    Label:
-        text: "Enter review:"
-    TextInput:
-        id: rating
-        multiline: True 
-    Button:
-        text: "Submit"
-        on_press: 
-            app.process_written(written.text)
-            app.process_rating(rating.text)
+    BoxLayout:
+        orientation:"vertical"
+        Label:
+            text: "Enter rating:"
+            font_size: sp(18)
+            color: (0.6, 0.1, 0.4, 1)  # Dark pink text
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
 
-   
+        TextInput:
+            id: rating
+            multiline: False 
+        Label:
+            text: "Enter review:"
+            font_size: sp(18)
+            color: (0.6, 0.1, 0.4, 1)  # Dark pink text
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+
+        TextInput:
+            id: rating
+            multiline: True 
+        Button:
+            text: "Submit"
+            on_press: 
+                app.process_written(written.text)
+                app.process_rating(rating.text)
+        Button:
+            text: "Back to Start Menu"
+            font_size: "24sp"
+            font_name: "Roboto"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.8, 0.6, 0.7, 1  # Muted pink
+            background_normal: ''
+            background_down: ''
+            border: (20, 20, 20, 20)
+            on_release:
+                app.root.current = "start"
+                root.manager.transition.direction = "right"
+        
+
 
 <Cam>:
     name: "camera"
@@ -312,3 +422,4 @@ WindowManager:
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
+
