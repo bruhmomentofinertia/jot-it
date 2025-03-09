@@ -13,8 +13,6 @@ from kivy.uix.image import Image
 import platform
 from kivy.uix.textinput import TextInput
 from ultralytics import YOLO
-import document_scan as ds
-import cv2
 
 
 class Start(Screen):
@@ -75,10 +73,7 @@ class Generated(Screen):
 class Show(Screen):
 
     def update_image(self, image_path):
-        scanner = ds.DocScanner(False)
-        new_img,new_path = scanner.scan(image_path)
-        print(new_path)
-        self.ids["cam_image"].source = new_path
+        self.ids["cam_image"].source = image_path
         self.ids["cam_image"].reload()  # Ensure the image updates
     
     def generate(self):
