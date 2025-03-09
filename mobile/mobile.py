@@ -10,6 +10,7 @@ from kivy.uix.camera import Camera
 import os
 import shutil
 from kivy.uix.image import Image
+import platform
 
 
 
@@ -20,6 +21,8 @@ class Start(Screen):
 
 class Cam(Screen):
     # current = None
+    def build(self):
+        self.rotation_angle = 90 if platform.system() == "Darwin" else 0  # Set rotation angle
     def start_camera(self):
         camera = self.ids.cam
         camera.play = not camera.play #on off
@@ -40,6 +43,12 @@ class Cam(Screen):
             camera.export_to_png("current.png")
             camera.export_to_png(filepath)
             self.manager.current = "show"
+
+class Rate(Screen):
+    pass
+
+class Enter(Screen):
+    pass
 
 class Upload(Screen):
     pass
