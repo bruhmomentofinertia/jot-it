@@ -5,6 +5,7 @@ WindowManager:
     Cam:
     Generated:
     Upload:
+    Show:
 
 <Start>:
     name: "start"
@@ -36,7 +37,7 @@ WindowManager:
             size_hint: None, None
             size: "250dp", "50dp"
             pos_hint: {"center_x": 0.5}
-            background_color: 0.4, 0.6, 0.7, 1  # Muted blue
+            background_color: 0.8, 0.6, 0.7, 1  # Muted pink
             background_normal: ''
             background_down: ''
             border: (20, 20, 20, 20)  # Rounded corners
@@ -49,13 +50,63 @@ WindowManager:
             size_hint: None, None
             size: "250dp", "50dp"
             pos_hint: {"center_x": 0.5}
-            background_color: 0.5, 0.7, 0.5, 1  # Muted green
+            background_color: 0.75, 0.5, 0.6, 1  # Muted pink
             background_normal: ''
             background_down: ''
             border: (20, 20, 20, 20)
             on_release:
                 app.root.current = "camera"
                 root.manager.transition.direction = "left"
+    # name: "start"
+    # BoxLayout:
+    #     orientation: "vertical"
+    #     size: root.width, root.height
+    #     padding: [20, 20, 20, 20]
+    #     spacing: 20
+        
+    #     Image:
+    #         source: "jot-it.png"
+    #         size_hint: None, None
+    #         size: "500dp", "300dp"
+    #         pos_hint: {"center_x": 0.5}
+        
+    #     Label:
+    #         text: ""
+    #         font_size: "30sp"
+    #         font_name: "Roboto"
+    #         color: 0, 0, 0, 1  # Black color for text
+    #         size_hint_y: None
+    #         height: self.texture_size[1]
+    #         halign: "center"
+        
+    #     Button:
+    #         text: "Go to Camera"
+    #         font_size: "24sp"
+    #         font_name: "Roboto"
+    #         size_hint: None, None
+    #         size: "250dp", "50dp"
+    #         pos_hint: {"center_x": 0.5}
+    #         background_color: 0.5, 0.7, 0.5, 1  
+    #         background_normal: ''
+    #         background_down: ''
+    #         border: (20, 20, 20, 20)
+    #         on_release:
+    #             app.root.current = "camera"
+    #             root.manager.transition.direction = "left"
+    #     Button: 
+    #         text: "Generate Translation"
+    #         font_size: 32
+    #         font_name: "Roboto"
+    #         size_hint: None, None
+    #         size: "250dp", "50dp"
+    #         pos_hint: {"center_x": 0.5}
+    #         background_color: 0.5, 0.7, 0.5, 1  
+    #         background_normal: ''
+    #         background_down: ''
+    #         border: (20, 20, 20, 20)
+    #         on_release: 
+    #             app.root.current = "gen"
+    #             root.manager.transition.direction = "left"
 
 <Cam>:
     name: "camera"
@@ -83,7 +134,9 @@ WindowManager:
             halign: "center"
         Button:
             text: "Take Picture"
-            on_release: root.take_picture()
+            on_release: 
+                root.take_picture()
+                app.root.current = "show"
         Button: 
             text: "Generate Translation"
             font_size: 32
@@ -105,7 +158,42 @@ WindowManager:
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
-
+<Show>:
+    name: "show"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: [20, 20, 20, 20]
+        spacing: 20
+        Image:
+            source: root.refresh()
+            size_hint: None, None
+            size: "500dp", "300dp"
+            pos_hint: {"center_x": 0.5}
+        # Button:
+        #     text: "Save Picture"
+        #     on_release: 
+        #         root.save()
+        Button: 
+            text: "Generate Translation"
+            font_size: 32
+            on_release: 
+                app.root.current = "gen"
+                root.manager.transition.direction = "left"
+        Button:
+            text: "Back to Camera"
+            font_size: "24sp"
+            font_name: "Roboto"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
+            background_color: 0.7, 0.4, 0.4, 1  # Muted red
+            background_normal: ''
+            background_down: ''
+            border: (20, 20, 20, 20)
+            on_release:
+                app.root.current = "camera"
+                root.manager.transition.direction = "right"
 <Upload>:
     name: "upload"
     BoxLayout:
