@@ -39,6 +39,8 @@ class Cam(Screen):
             filepath = os.path.join(save_dir, self.get_filename())
             camera.export_to_png("current.png")
             camera.export_to_png(filepath)
+            app = App.get_running_app()
+            self.ids['cam_image'].source = "current.png"
             self.manager.current = "show"
 
 class Upload(Screen):
