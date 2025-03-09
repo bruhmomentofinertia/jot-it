@@ -58,89 +58,52 @@ WindowManager:
             on_release:
                 app.root.current = "camera"
                 root.manager.transition.direction = "left"
-    # name: "start"
-    # BoxLayout:
-    #     orientation: "vertical"
-    #     size: root.width, root.height
-    #     padding: [20, 20, 20, 20]
-    #     spacing: 20
-        
-    #     Image:
-    #         source: "jot-it.png"
-    #         size_hint: None, None
-    #         size: "500dp", "300dp"
-    #         pos_hint: {"center_x": 0.5}
-        
-    #     Label:
-    #         text: ""
-    #         font_size: "30sp"
-    #         font_name: "Roboto"
-    #         color: 0, 0, 0, 1  # Black color for text
-    #         size_hint_y: None
-    #         height: self.texture_size[1]
-    #         halign: "center"
-        
-    #     Button:
-    #         text: "Go to Camera"
-    #         font_size: "24sp"
-    #         font_name: "Roboto"
-    #         size_hint: None, None
-    #         size: "250dp", "50dp"
-    #         pos_hint: {"center_x": 0.5}
-    #         background_color: 0.5, 0.7, 0.5, 1  
-    #         background_normal: ''
-    #         background_down: ''
-    #         border: (20, 20, 20, 20)
-    #         on_release:
-    #             app.root.current = "camera"
-    #             root.manager.transition.direction = "left"
-    #     Button: 
-    #         text: "Generate Translation"
-    #         font_size: 32
-    #         font_name: "Roboto"
-    #         size_hint: None, None
-    #         size: "250dp", "50dp"
-    #         pos_hint: {"center_x": 0.5}
-    #         background_color: 0.5, 0.7, 0.5, 1  
-    #         background_normal: ''
-    #         background_down: ''
-    #         border: (20, 20, 20, 20)
-    #         on_release: 
-    #             app.root.current = "gen"
-    #             root.manager.transition.direction = "left"
+
 
 <Cam>:
     name: "camera"
     BoxLayout:
         orientation: "vertical"
+        #size_hint_y: 0.8
+        size_hint: 0.8, None
         size: root.width, root.height
         padding: [20, 20, 20, 20]
         spacing: 20
+        pos_hint: {"center_x": 0.5}
         Camera:
             id: cam
             index: 0
             resolution: (640, 480)
             play: True  
+            allow_stretch: True  # Allows the camera to stretch to fit the space
+            keep_ratio: False
 
-        Label:
-            text: "Camera Screen"
-            font_size: "30sp"
-            font_name: "Roboto"
-            color: 0, 0, 0, 1
-            size_hint_y: None
-            height: self.texture_size[1]
-            halign: "center"
+        # Label:
+        #     text: "Camera Screen"
+        #     font_size: "30sp"
+        #     size_hint: None, None
+        #     font_name: "Roboto"
+        #     color: 0, 0, 0, 1
+        #     size_hint_y: None
+        #     size: "250dp", "50dp"
+        #     height: self.texture_size[1]
+        #     halign: "center"
         
         Button:
             text: "Take Picture"
+            size_hint: None, None
+            size: "250dp", "50dp"
+            pos_hint: {"center_x": 0.5}
             background_color: 0.9, 0.7, 0.8, 1  # Lighter muted pink
             on_release: 
                 root.take_picture()
-        
                 app.root.current = "show"
         Button: 
             text: "Generate Translation"
+            size_hint: None, None
+            size: "250dp", "50dp"
             font_size: 32
+            pos_hint: {"center_x": 0.5}
             background_color: 0.85, 0.6, 0.7, 1  # Lighter muted pink
             on_release: 
                 app.root.current = "gen"
@@ -168,7 +131,7 @@ WindowManager:
         padding: [20, 20, 20, 20]
         spacing: 20
         Image:
-            source: root.refresh()
+            source: "current.png"
             size_hint: None, None
             size: "500dp", "300dp"
             pos_hint: {"center_x": 0.5}
@@ -196,6 +159,10 @@ WindowManager:
             on_release:
                 app.root.current = "camera"
                 root.manager.transition.direction = "right"
+    # def on_enter(self, *args):
+    #     # Reload the image when the screen is entered
+    #     self.ids.img.source = "current.png"
+    #     self.ids.img.reload()
 <Upload>:
     name: "upload"
     BoxLayout:
@@ -203,6 +170,7 @@ WindowManager:
         size: root.width, root.height
         padding: [20, 20, 20, 20]
         spacing: 20
+        #size_hint: 0.8
         
         FileChooserIconView:
             id: filechooser
