@@ -266,7 +266,7 @@ class DocScanner(object):
     def scan(self, image_path):
 
         RESCALED_HEIGHT = 500.0
-        OUTPUT_DIR = 'jot-it/scanned'
+        OUTPUT_DIR = '../saved_photos'
 
         # load the image and compute the ratio of the old height
         # to the new height, clone it, and resize it
@@ -288,20 +288,20 @@ class DocScanner(object):
         warped = transform.four_point_transform(orig, screenCnt * ratio)
 
         # convert the warped image to grayscale
-        #gray = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
 
         # sharpen image
-        #sharpen = cv2.GaussianBlur(gray, (0,0), 3)
-        #sharpen = cv2.addWeighted(gray, 1.5, sharpen, -0.5, 0)
+        sharpen = cv2.GaussianBlur(gray, (0,0), 3)
+        sharpen = cv2.addWeighted(gray, 1.5, sharpen, -0.5, 0)
 
         # apply adaptive threshold to get black and white effect
-        #thresh = cv2.adaptiveThreshold(sharpen, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 21, 15)
+        thresh = cv2.adaptiveThreshold(sharpen, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 21, 15)
 
         # save the transformed image
         basename = os.path.basename(image_path)
-        #cv2.imwrite(OUTPUT_DIR + '/' + basename, thresh)
+        cv2.imwrite(OUTPUT_DIR + '/' + basename, thresh)
         print("Proccessed " + basename)
-        return warped
+        return thresh, OUTPUT_DIR + '/' + basename
         
 
 
