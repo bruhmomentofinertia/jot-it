@@ -11,6 +11,7 @@ import os
 import shutil
 from kivy.uix.image import Image
 import platform
+from kivy.uix.textinput import TextInput
 
 
 
@@ -22,7 +23,7 @@ class Start(Screen):
 class Cam(Screen):
     # current = None
     def build(self):
-        self.rotation_angle = 90 if platform.system() == "Darwin" else 0  # Set rotation angle
+        self.rotation_angle = 90 if platform.system() == "Darwin" else 0  
     def start_camera(self):
         camera = self.ids.cam
         camera.play = not camera.play #on off
@@ -71,6 +72,18 @@ class WindowManager(ScreenManager):
 kv = Builder.load_file("new_window.kv")
 
 class JotIt(App):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.hospital_name = ""  # Variable to store input text
+        self.doctor_name = ""
+        self.country_name = ""
+
+    def process_hospital(self, text):
+        self.hospital_name = text  # Save the input in a variable
+    def process_doctor(self, text):
+        self.doctor_name = text
+    def process_country(self, text):
+        self.country_name = text
     def build(self):
         Window.clearcolor = (1, 1, 1, 1)
         self.window = GridLayout()
