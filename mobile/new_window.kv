@@ -344,7 +344,8 @@ WindowManager:
         Button: 
             text: "Generate Translation"
             font_size: 32
-            on_release: 
+            on_release:
+                root.generate()
                 app.root.current = "gen"
                 root.manager.transition.direction = "left"
         Button:
@@ -408,9 +409,11 @@ WindowManager:
         orientation:"vertical"
         size:root.width, root.height
         Label:
-            id: text
+            id: medicine
             text: "GENERATED SENTENCE HERE"
             font_size: 32
+            color: 0.9, 0.7, 0.8, 1
+            
         Button: 
             text: "Go Back to Camera"
             font_size: 32
