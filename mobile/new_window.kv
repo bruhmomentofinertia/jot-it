@@ -180,16 +180,16 @@ WindowManager:
             on_release: 
                 root.take_picture()
                 app.root.current = "show"
-        Button: 
-            text: "Generate Translation"
-            size_hint: None, None
-            size: "250dp", "50dp"
-            font_size: 32
-            pos_hint: {"center_x": 0.5}
-            background_color: 0.85, 0.6, 0.7, 1  # Lighter muted pink
-            on_release: 
-                app.root.current = "gen"
-                root.manager.transition.direction = "left"
+        # Button: 
+        #     text: "Generate Translation"
+        #     size_hint: None, None
+        #     size: "250dp", "50dp"
+        #     font_size: 32
+        #     pos_hint: {"center_x": 0.5}
+        #     background_color: 0.85, 0.6, 0.7, 1  # Lighter muted pink
+        #     on_release: 
+        #         app.root.current = "gen"
+        #         root.manager.transition.direction = "left"
 
         Button:
             text: "Back to Start Menu"
