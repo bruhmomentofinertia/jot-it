@@ -49,6 +49,8 @@ class Cam(Screen):
 class Rate(Screen):
     pass
 
+class Review(Screen):
+    pass
 class Enter(Screen):
     pass
 
@@ -89,18 +91,35 @@ class JotIt(App):
         self.hospital_name = ""  # Variable to store input text
         self.doctor_name = ""
         self.country_name = ""
-
+        self.written= ""
+        self.rating = []
+    def process_rating(self,text):
+        self.rating += [int(text)]
+    def process_written(self,text):
+        self.written = text
     def process_hospital(self, text):
-        self.hospital_name = text  # Save the input in a variable
+        self.hospital_name = text.lower().replace(" ", "_") # Save the input in a variable
     def process_doctor(self, text):
-        self.doctor_name = text
+        self.doctor_name = text.lower().replace(" ", "_")
     def process_country(self, text):
-        self.country_name = text
+        self.country_name = text.lower().replace(" ", "_")
     def build(self):
         Window.clearcolor = (1, 1, 1, 1)
         self.window = GridLayout()
         self.window.cols = 1
         return kv
+    def get_rating_list(self):
+        return self.rating
+    def get_rating_full(self):
+        return str(sum(self.rating)/len(self.rating))
+    def get_written(self):
+        return self.written
+    def get_country(self):
+        return self.country_name
+    def get_hospital(self):
+        return self.hospital_name
+    def get_doctor(self):
+        return self.doctor_name
 
     def open_filechooser(self):
         """Open the file chooser dialog to select an image file."""
