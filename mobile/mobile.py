@@ -13,6 +13,10 @@ from kivy.uix.image import Image
 import platform
 from kivy.uix.textinput import TextInput
 from ultralytics import YOLO
+import document_scan as ds
+import cv2
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
 
 
 class Start(Screen):
@@ -92,12 +96,12 @@ class JotIt(App):
         self.hospital_name = ""  # Variable to store input text
         self.doctor_name = ""
         self.country_name = ""
-        self.written= ""
+        self.written= []
         self.rating = []
     def process_rating(self,text):
         self.rating += [int(text)]
     def process_written(self,text):
-        self.written = text
+        self.written += [text]
     def process_hospital(self, text):
         self.hospital_name = text.lower().replace(" ", "_") # Save the input in a variable
     def process_doctor(self, text):
@@ -121,7 +125,29 @@ class JotIt(App):
         return self.hospital_name
     def get_doctor(self):
         return self.doctor_name
+    def submit_review(self):
+        rating_text = self.rating
+        review_text = self.written
 
+        if rating_text and review_text:
+            self.written.append((rating_text, review_text))  # Append new review tuple
+
+        self.root.ids.rating.text = ""
+        self.root.ids.written.text = ""
+            
+        self.update_reviews_display()
+
+        self.root.current = "enter"
+        self.root.manager.transition.direction = "left"
+
+    def update_reviews_display(self):
+        self.root.ids.enter.clear_widgets()
+
+        for rating, review in self.reviews:
+            review_label = BoxLayout(orientation="horizontal", size_hint_y=None, height="50dp")
+            review_label.add_widget(Label(text=f"Rating: {rating}"))
+            review_label.add_widget(Label(text=f"Review: {review}"))
+            self.root.ids.enter.add_widget(review_label)
     def open_filechooser(self):
         """Open the file chooser dialog to select an image file."""
         self.root.current = "upload"  # Switch to the Upload screen
