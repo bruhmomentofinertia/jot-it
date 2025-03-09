@@ -205,28 +205,28 @@ WindowManager:
 
 <Enter>:
     name: "enter"
-    AnchorLayout:
-        anchor_x: 'left'
-        anchor_y: 'top'
+    # AnchorLayout:
+    #     anchor_x: 'left'
+    #     anchor_y: 'top'
         
-        BoxLayout:
-            orientation: 'vertical'
-            size_hint: None, None
-            size: self.width, self.height
+    # BoxLayout:
+    #     orientation: 'vertical'
+    #     size_hint: None, None
+    #     size: self.width, self.height
 
-            Image:
-                id: doc_image
-                source: "ayse_sokullu.png"  #app.get_doctor() + "png"
-                size: "500dp", "300dp"
-                size_hint: None, None
-                pos_hint: {'x': 0, 'top': 1}  # Position the image at the top left
-            
-            Label:
-                text: "Rating: "
-                font_size: sp(18)
-                color: (0.6, 0.1, 0.4, 1)  # Dark pink text
-                size_hint_y: None
-                height: self.texture_size[1] + dp(10)
+    #     Image:
+    #         id: doc_image
+    #         source: "ayse_sokullu.png"  #app.get_doctor() + "png"
+    #         size: "500dp", "300dp"
+    #         size_hint: None, None
+    #         # pos_hint: {'x': 0, 'top': 1}  # Position the image at the top left
+        
+    #     Label:
+    #         text: "Rating: "
+    #         font_size: sp(18)
+    #         color: (0.6, 0.1, 0.4, 1)  # Dark pink text
+    #         size_hint_y: None
+    #         height: self.texture_size[1] + dp(10)
     BoxLayout:
         orientation: "vertical"
         # BoxLayout:
@@ -234,11 +234,25 @@ WindowManager:
         Image:
             id: doc_image
             source: "ayse_sokullu.png" #app.get_doctor() + "png"
-            pos_hint: {"x":0, "top":1}
+            # pos_hint: {"x":0, "top":1}
             size: "500dp", "300dp"
             size_hint: None, None
+        # Label:
+        #     text: "\n\n\n\n\n\n\n\n\n\n\n\n"
+            
+        #     font_size: sp(18)
+        #     color: (0.6, 0.1, 0.4, 1)  # Dark pink text
+        #     size_hint_y: None
+        #     height: self.texture_size[1] + dp(10)
         Label:
-            text: "Rating: "
+            text: "Doctor: Ayse Sokullu\nRating: 4"
+            font_size: sp(18)
+            color: (0.6, 0.1, 0.4, 1)  # Dark pink text
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+        Label:
+            text: "No reviews yet\n\n\n\n\n\n\n\n\n\n\n\n"
+            
             font_size: sp(18)
             color: (0.6, 0.1, 0.4, 1)  # Dark pink text
             size_hint_y: None
@@ -253,6 +267,15 @@ WindowManager:
                 on_release:
                     app.root.current = "review"
                     root.manager.transition.direction = "right"
+        Button:
+            text: "Back to Start Menu"
+            size_hint_y: None
+            height: dp(50)
+            background_color: 0.9, 0.7, 0.8, 1
+            color: (1, 1, 1, 1)
+            on_release:
+                app.root.current = "start"
+                root.manager.transition.direction = "right"
 
 <Review>:
     name: "review"
@@ -268,6 +291,13 @@ WindowManager:
         TextInput:
             id: rating
             multiline: False 
+            size_hint_y: None
+            height: dp(40)
+            padding: dp(10)
+            font_size: sp(16)
+            background_color: (1, 0.8, 0.9, 1)  # Light pink input box
+            foreground_color: (0.4, 0, 0.2, 1)  # Dark pink text
+            border: (2, 2, 2, 2)
         Label:
             text: "Enter review:"
             font_size: sp(18)
@@ -278,14 +308,25 @@ WindowManager:
         TextInput:
             id: written
             multiline: True 
+            size_hint_y: 
+            height: dp(300)
+            padding: dp(10)
+            font_size: sp(16)
+            background_color: (1, 0.8, 0.9, 1)  # Light pink input box
+            foreground_color: (0.4, 0, 0.2, 1)  # Dark pink text
+            border: (2, 2, 2, 2)
         Button:
             text: "Submit"
+            size_hint_y: None
+            height: dp(50)
+            background_color: 0.9, 0.7, 0.8, 1
+            color: (1, 1, 1, 1)
             on_press: 
                 app.process_written(written.text)
                 app.process_rating(rating.text)
                 app.submit_review()
-                # app.root.current = "enter"
-                # root.manager.transition.direction = "right"
+                app.root.current = "enter"
+                root.manager.transition.direction = "right"
 
         Button:
             text: "Back to Start Menu"
