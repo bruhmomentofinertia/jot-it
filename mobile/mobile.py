@@ -12,10 +12,10 @@ import shutil
 from kivy.uix.image import Image
 
 
-#need to import kivy and ffpyplayer and download the kivy extension, kivy[base], opencv-python
 
 class Start(Screen):
     pass
+
 
 class Cam(Screen):
     # current = None
@@ -31,6 +31,8 @@ class Cam(Screen):
         return f"photo_{picture_count}.png"
     def take_picture(self):
         camera = self.ids.cam
+        if camera.play:
+            save_dir = os.path.join(os.getcwd(), "saved_photos")
         if camera.play:
             save_dir = os.path.join(os.getcwd(), "saved_photos")
             if not os.path.exists(save_dir):
