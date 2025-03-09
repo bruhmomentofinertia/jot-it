@@ -213,6 +213,7 @@ WindowManager:
         padding: [20, 20, 20, 20]
         spacing: 20
         Image:
+            id: cam_image
             source: "current.png"
             size_hint: None, None
             size: "500dp", "300dp"
@@ -288,6 +289,7 @@ WindowManager:
         orientation:"vertical"
         size:root.width, root.height
         Label:
+            id: text
             text: "GENERATED SENTENCE HERE"
             font_size: 32
         Button: 
