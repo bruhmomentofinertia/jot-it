@@ -11,8 +11,7 @@ import os
 import shutil
 from kivy.uix.image import Image
 import platform
-
-
+from ultralytics import YOLO
 
 
 class Start(Screen):
@@ -42,8 +41,8 @@ class Cam(Screen):
             filepath = os.path.join(save_dir, self.get_filename())
             camera.export_to_png("current.png")
             camera.export_to_png(filepath)
-            app = App.get_running_app()
-            self.ids['cam_image'].source = "current.png"
+            image_screen = self.manager.get_screen('show')
+            image_screen.update_image(filepath)
             self.manager.current = "show"
 
 class Rate(Screen):
@@ -56,16 +55,16 @@ class Upload(Screen):
     pass
 
 class Generated(Screen):
-    pass
+    def build(self):
+        self.model = YOLO("medicine.pt")
+    
+    
 
 class Show(Screen):
-    pass
-    # image_source = StringProperty("")  # This line is crucial
-    # def refresh(self):
-    #     return "current.png"
-    # def on_enter(self, *args):
-    #     self.ids.img.source = ""  # Clear the source first
-    #     self.ids.img.source = "current.png"  # Set the source to the current picture
+
+    def update_image(self, image_path):
+        self.ids["cam_image"].source = image_path
+        self.ids["cam_image"].reload()  # Ensure the image updates
 
 class WindowManager(ScreenManager):
     pass
