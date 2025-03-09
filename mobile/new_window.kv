@@ -212,6 +212,7 @@ WindowManager:
         Image:
             id: doc_image
             source: "ayse_sokullu.png" #app.get_doctor() + "png"
+            pos_hint: {"x":0, "top":1}
             size: "500dp", "300dp"
             size_hint: None, None
         Label:
@@ -254,13 +255,17 @@ WindowManager:
             height: self.texture_size[1] + dp(10)
 
         TextInput:
-            id: rating
+            id: written
             multiline: True 
         Button:
             text: "Submit"
             on_press: 
                 app.process_written(written.text)
                 app.process_rating(rating.text)
+                app.submit_review()
+                # app.root.current = "enter"
+                # root.manager.transition.direction = "right"
+
         Button:
             text: "Back to Start Menu"
             font_size: "24sp"
@@ -275,7 +280,6 @@ WindowManager:
             on_release:
                 app.root.current = "start"
                 root.manager.transition.direction = "right"
-        
 
 
 <Cam>:
