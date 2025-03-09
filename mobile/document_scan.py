@@ -299,7 +299,7 @@ class DocScanner(object):
 
         # save the transformed image
         basename = os.path.basename(image_path)
-        cv2.imwrite(OUTPUT_DIR + '/' + basename, thresh)
+        cv2.imwrite(OUTPUT_DIR + '/' + "+"+ basename, thresh)
         print("Proccessed " + basename)
         return thresh, OUTPUT_DIR + '/' + basename
         

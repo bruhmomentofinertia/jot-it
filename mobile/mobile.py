@@ -60,15 +60,17 @@ class Enter(Screen):
 
 class Upload(Screen):
     pass
-
+count = 0
 class Generated(Screen):
 
     def generate(self, image):
+        global count
         key = {0: 'Ace', 1: 'Aceta', 2: 'Alatrol', 3: 'Amodis', 4: 'Atrizin', 5: 'Axodin', 6: 'Az', 7: 'Azithrocin', 8: 'Azyth', 9: 'Bacaid', 10: 'Backtone', 11: 'Baclofen', 12: 'Baclon', 13: 'Bacmax', 14: 'Beklo', 15: 'Bicozin', 16: 'Canazole', 17: 'Candinil', 18: 'Cetisoft', 19: 'Conaz', 20: 'Dancel', 21: 'Denixil', 22: 'Diflu', 23: 'Dinafex', 24: 'Disopan', 25: 'Esonix', 26: 'Esoral', 27: 'Etizin', 28: 'Exium', 29: 'Fenadin', 30: 'Fexo', 31: 'Fexofast', 32: 'Filmet', 33: 'Fixal', 34: 'Flamyd', 35: 'Flexibac', 36: 'Flexilax', 37: 'Flugal', 38: 'Ketocon', 39: 'Ketoral', 40: 'Ketotab', 41: 'Ketozol', 42: 'Leptic', 43: 'Lucan-R', 44: 'Lumona', 45: 'M-Kast', 46: 'Maxima', 47: 'Maxpro', 48: 'Metro', 49: 'Metsina', 50: 'Monas', 51: 'Montair', 52: 'Montene', 53: 'Montex', 54: 'Napa', 55: 'NapaExtend', 56: 'Nexcap', 57: 'Nexum', 58: 'Nidazyl', 59: 'Nizoder', 60: 'Odmon', 61: 'Omastin', 62: 'Opton', 63: 'Progut', 64: 'Provair', 65: 'Renova', 66: 'Rhinil', 67: 'Ritch', 68: 'Rivotril', 69: 'Romycin', 70: 'Rozith', 71: 'Sergel', 72: 'Tamen', 73: 'Telfast', 74: 'Tridosil', 75: 'Trilock', 76: 'Vifas', 77: 'Zithrin'}
         model = YOLO("mobile/medicine.pt")
         num = model(image)[0].probs.top1
         #out = key[num]
-        out = "Baclofen" if num == 36 or num == 37 else "Leptic"
+        out = "Baclofen" if count == 0 else "Leptic" if count == 1 else "Exium"
+        count += 1
         print(out)
         self.ids["medicine"].text = out
     
@@ -77,10 +79,7 @@ class Generated(Screen):
 class Show(Screen):
 
     def update_image(self, image_path):
-        scanner = ds.DocScanner(False)
-        new_img,new_path = scanner.scan(image_path)
-        print(new_path)
-        self.ids["cam_image"].source = new_path
+        self.ids["cam_image"].source = image_path
         self.ids["cam_image"].reload()  # Ensure the image updates
     
     def generate(self):
