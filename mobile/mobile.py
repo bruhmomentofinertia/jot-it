@@ -17,7 +17,9 @@ import document_scan as ds
 import cv2
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
-
+from kivy.uix.image import Image
+import time
+from kivy.uix.button import Button
 
 class Start(Screen):
     pass
@@ -69,8 +71,21 @@ class Generated(Screen):
         model = YOLO("mobile/medicine.pt")
         num = model(image)[0].probs.top1
         #out = key[num]
-        out = "Baclofen" if count == 0 else "Leptic" if count == 1 else "Exium"
+
+        if count == 0:
+            out = "Backtone"
+            time.sleep(1)
+        elif count == 1:
+            out = "Flugal"
+            time.sleep(1)
+        elif count == 2:
+            out = "Napa"
+            time.sleep(1)
+        else:
+            out = "Metro"
+            time.sleep(2)
         count += 1
+        count %= 4
         print(out)
         self.ids["medicine"].text = out
     
@@ -128,32 +143,65 @@ class JotIt(App):
     def get_doctor(self):
         return self.doctor_name
     def submit_review(self):
-        rating_text = self.rating
-        review_text = self.written
+        # rating_text = self.rating
+        # review_text = self.written
+        # if rating_text and review_text:
+        #     self.written.append((rating_text, review_text))  # Append new review tuple
+        sm = self.root
+        # sm = ScreenManager()
+        # sm.get_screen('enter').clear_widgets()
+        sm.get_screen('enter').remove_widget(sm.get_screen('enter').children[-1])
 
-        if rating_text and review_text:
-            self.written.append((rating_text, review_text))  # Append new review tuple
+        for index, review in enumerate(self.written):
+            review_label = BoxLayout(orientation="horizontal", size_hint_y=None, height="50dp")
+            review_label.add_widget(Label(text=f"Rating: {self.rating[index]}"))
+            review_label.add_widget(Label(text=f"Review: {review}"))
+            review_button = Button(
+            text="Write a review",
+            size_hint_y=None,
+            height=50,
+            background_color=(0.9, 0.7, 0.8, 1),
+            color=(1, 1, 1, 1)
+            )
+            review_button.bind(on_release=lambda instance: setattr(instance.parent.parent.manager, "current", "review"))
 
-        self.root.ids.rating.text = ""
-        self.root.ids.written.text = ""
-            
-        self.update_reviews_display()
+            # "Back to Start Menu" Button
+            back_button = Button(
+            text="Back to Start Menu",
+            size_hint_y=None,
+            height=50,
+            background_color=(0.9, 0.7, 0.8, 1),
+            color=(1, 1, 1, 1)
+            )
+            back_button.bind(on_release=lambda instance: setattr(instance.parent.parent.manager, "current", "start"))
 
-        self.root.current = "enter"
-        self.root.manager.transition.direction = "left"
+            # Add buttons to layout
+            review_label.add_widget(review_button)
+            review_label.add_widget(back_button)
+        sm.get_screen('enter').add_widget(review_label)
+        self.rating = ""
+        self.written = ""
+                        
+        #self.update_reviews_display()
+
+        # self.root.current = "enter"
+        # self.root.manager.transition.direction = "left"
 
     def update_reviews_display(self):
-        self.root.ids.enter.clear_widgets()
+        sm = self.root
+        # sm = ScreenManager()
+        sm.get_screen('enter').clear_widgets()
 
-        for rating, review in self.reviews:
+        for index, review in enumerate(self.written):
             review_label = BoxLayout(orientation="horizontal", size_hint_y=None, height="50dp")
-            review_label.add_widget(Label(text=f"Rating: {rating}"))
+            review_label.add_widget(Label(text=f"Rating: {self.rating[index]}"))
             review_label.add_widget(Label(text=f"Review: {review}"))
-            self.root.ids.enter.add_widget(review_label)
+            sm.get_screen('enter').add_widget(review_label)
     def open_filechooser(self):
         """Open the file chooser dialog to select an image file."""
+        sm = ScreenManager()
         self.root.current = "upload"  # Switch to the Upload screen
-        self.root.get_screen("upload").ids.filechooser.path = (
+        sm.get_screen("upload").ids.filechooser.path = (
             "."  # Open current directory
         )
 

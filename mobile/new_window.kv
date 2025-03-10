@@ -251,22 +251,22 @@ WindowManager:
             size_hint_y: None
             height: self.texture_size[1] + dp(10)
         Label:
-            text: "No reviews yet\n\n\n\n\n\n\n\n\n\n\n\n"
+            text: "No reviews yet\n\n\n\n\n\n\n\n\n\n"
             
             font_size: sp(18)
             color: (0.6, 0.1, 0.4, 1)  # Dark pink text
             size_hint_y: None
             height: self.texture_size[1] + dp(10)
 
-            Button:
-                text: "Write a review"
-                size_hint_y: None
-                height: dp(50)
-                background_color: 0.9, 0.7, 0.8, 1
-                color: (1, 1, 1, 1)
-                on_release:
-                    app.root.current = "review"
-                    root.manager.transition.direction = "right"
+        Button:
+            text: "Write a review"
+            size_hint_y: None
+            height: dp(50)
+            background_color: 0.9, 0.7, 0.8, 1
+            color: (1, 1, 1, 1)
+            on_release:
+                app.root.current = "review"
+                root.manager.transition.direction = "right"
         Button:
             text: "Back to Start Menu"
             size_hint_y: None
@@ -322,9 +322,11 @@ WindowManager:
             background_color: 0.9, 0.7, 0.8, 1
             color: (1, 1, 1, 1)
             on_press: 
-                app.process_written(written.text)
-                app.process_rating(rating.text)
-                app.submit_review()
+                # app.root.current = "enter"
+                # root.manager.transition.direction = "right"
+                # app.process_written(written.text)
+                # app.process_rating(rating.text)
+                # app.submit_review()
                 app.root.current = "enter"
                 root.manager.transition.direction = "right"
 
